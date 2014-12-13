@@ -52,16 +52,20 @@
                 android:layout_height="wrap_content"
                 android:text="Entrar"
                 android:id="@+id/btnLogin"
-                android:layout_below="@+id/txtError" android:layout_alignParentLeft="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true" android:background="#ff449d44"
-                android:onClick="btnLoginOnClick"/>
+                android:onClick="btnLoginOnClick" android:layout_below="@+id/txtErrorServer"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email ou senha inválido."
-                android:id="@+id/txtError"
+                android:id="@+id/txtErrorLogin"
                 android:layout_below="@+id/txtPassword" android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true" android:textColor="#ffd9534f"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="Erro ao buscar dados do servidor." android:id="@+id/txtErrorServer"
+                  android:textColor="#ffd9534f" android:layout_below="@+id/txtErrorLogin"
+                  android:layout_alignParentStart="true"/>
     </RelativeLayout>
 </LinearLayout>
 
