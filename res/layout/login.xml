@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:weightSum="1">
+    <ImageView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" android:focusableInTouchMode="false" android:id="@+id/imgLogo"
+            android:src="@drawable/ic_launcher" android:layout_weight="0.15"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Educar em Casa"
+            android:id="@+id/txtNomeAplicacao" android:layout_gravity="center_horizontal" android:layout_weight="0.02"
+            android:gravity="center"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_gravity="center_horizontal"
+            android:layout_weight="0.15">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usuário"
+                android:id="@+id/labelLogin" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true" android:paddingLeft="5dp" android:textColor="#ff959595"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:layout_below="@+id/labelLogin"
+                android:layout_alignParentLeft="true" android:layout_alignParentRight="true"
+                android:id="@+id/txtLogin"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Senha"
+                android:layout_below="@+id/txtLogin" android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true" android:id="@+id/labelPassword" android:paddingLeft="5dp"
+                android:textColor="#ff959595"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/txtPassword" android:layout_below="@+id/labelPassword"
+                android:layout_alignParentLeft="true" android:layout_alignParentRight="true"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Entrar"
+                android:id="@+id/btnLogin"
+                android:layout_below="@+id/txtError" android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true" android:background="#ff449d44"
+                android:onClick="btnLoginOnClick"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email ou senha inválido."
+                android:id="@+id/txtError"
+                android:layout_below="@+id/txtPassword" android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true" android:textColor="#ffd9534f"/>
+    </RelativeLayout>
+</LinearLayout>
+
