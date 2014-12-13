@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome do Filho"
+            android:id="@+id/textView"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notas"
+                android:id="@+id/btnNotas" android:background="#ff2e6da4" android:onClick="btnNotasOnClick"/>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Faltas"
+                android:id="@+id/btnFaltas" android:background="#31b0d5" android:layout_marginLeft="5dp"
+                android:onClick="btnFaltasOnClick"/>
+    </LinearLayout>
+</LinearLayout>

@@ -12,5 +12,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".DetalhesActivity"/>
+        <activity android:name=".SelecionarFilhoActivity"/>
+        <activity android:name=".NotasActivity"/>
+        <activity android:name=".FaltasActivity"/>
     </application>
 </manifest>
