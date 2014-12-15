@@ -98,9 +98,9 @@ public class LoginActivity extends Activity {
     }
 
     private Integer login(String email, String password) {
-        Tarefa tarefaPost;
-        tarefaPost = new Tarefa(Util.URL_WEBSERVICE + "/classes/utils/login.php?username="+ email + "&password=" + password);
-        tarefaPost.setEventListen(new TarefaEvents() {
+        Tarefa tarefa;
+        tarefa = new Tarefa(Util.URL_WEBSERVICE + "/classes/utils/login.php?username="+ email + "&password=" + password);
+        tarefa.setEventListen(new TarefaEvents() {
             @Override
             public void onCompleta(String retorno) {
                 Login login = gson.fromJson(retorno, Login.class);
@@ -118,7 +118,7 @@ public class LoginActivity extends Activity {
                 System.out.println("Iniciando sincronização.");
             }
         });
-        tarefaPost.executar(true);
+        tarefa.executar(true);
         return null;
     }
 
