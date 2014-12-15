@@ -36,7 +36,7 @@ public class SelecionarFilhoActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Filho filho = list.get(parseInt(String.valueOf(parent.getItemIdAtPosition(position))));
+                Filho filho = list.get(position);
                 Intent intent = new Intent(SelecionarFilhoActivity.this, DetalhesActivity.class);
                 Bundle parametro = new Bundle();
                 parametro.putSerializable("filho",filho);

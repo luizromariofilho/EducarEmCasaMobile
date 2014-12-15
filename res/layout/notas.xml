@@ -7,6 +7,10 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notas"
+            android:text="Disciplina - Semestre - Nota"
             android:id="@+id/textView4"/>
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView2"/>
 </LinearLayout>
