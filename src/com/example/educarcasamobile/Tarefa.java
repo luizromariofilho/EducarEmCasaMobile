@@ -71,6 +71,7 @@ public class Tarefa {
             try{
                 return tarefas[0].executar();
             }catch (Exception ex){
+                ex.printStackTrace();
                 falha=true;
                 return null;
             }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,18 +21,14 @@ public class SelecionarFilhoActivity extends Activity {
     private ListView listView;
     private static final int REQUEST_DETALHES_CODE = 1;
 
-    {
-        list = new ArrayList<Filho>();
-        list.add(new Filho(1, "Teste Filho 1"));
-        list.add(new Filho(2, "Teste Filho 2"));
-        list.add(new Filho(3, "Teste Filho 3"));
-        list.add(new Filho(4, "Teste Filho 4"));
-        list.add(new Filho(5, "Teste Filho 5"));
-    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selecionar_filho);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        ArrayList<Filho> filhos = (ArrayList<Filho>)extras.getSerializable("filhos");
+        list = filhos;
         listView = (ListView) findViewById(R.id.listView);
 
         listView.setAdapter(new FilhoListAdapter(list, this));
