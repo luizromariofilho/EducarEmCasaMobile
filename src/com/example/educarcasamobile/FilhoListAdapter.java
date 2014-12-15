@@ -10,9 +10,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Luiz Romario Filho on 12/13/2014.
- */
 public class FilhoListAdapter extends BaseAdapter {
     private List<Filho> filhos;
     private Context context;

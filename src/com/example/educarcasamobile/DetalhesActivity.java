@@ -12,9 +12,6 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Luiz Romario Filho on 12/13/2014.
- */
 public class DetalhesActivity extends Activity {
     private Filho filho;
     private TextView txtNomeFilho;

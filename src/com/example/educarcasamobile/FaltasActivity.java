@@ -8,9 +8,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Luiz Romario Filho on 12/13/2014.
- */
 public class FaltasActivity extends Activity {
     private ListView listView;
     private List<DetalhesFilho> list;

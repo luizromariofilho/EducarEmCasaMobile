@@ -10,14 +10,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends Activity {
-    /**
-     * Called when the activity is first created.
-     */
     private EditText txtLogin;
     protected EditText txtPassword;
     private TextView txtErrorLogin;

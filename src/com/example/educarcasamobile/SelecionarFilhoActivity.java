@@ -13,9 +13,6 @@ import java.util.List;
 
 import static java.lang.Integer.*;
 
-/**
- * Created by Luiz Romario Filho on 12/13/2014.
- */
 public class SelecionarFilhoActivity extends Activity {
     private List<Filho> list;
     private ListView listView;

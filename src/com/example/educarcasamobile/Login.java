@@ -2,9 +2,6 @@ package com.example.educarcasamobile;
 
 import java.io.Serializable;
 
-/**
- * Created by Luiz Romario Filho on 12/15/2014.
- */
 public class Login implements Serializable {
     private Integer permissao;
     private Integer id;
