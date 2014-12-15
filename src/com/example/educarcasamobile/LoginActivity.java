@@ -24,7 +24,6 @@ public class LoginActivity extends Activity {
     private TextView txtErrorServer;
     private List<Filho> filhos;
     private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-    private Integer idResponsavel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,8 +53,7 @@ public class LoginActivity extends Activity {
     }
 
     private void loginOnServer(String email, String password) {
-        Integer idResponsavel = 2;//login(email,password);
-        getFilhos(idResponsavel);
+        login(email,password);
     }
 
     private List<Filho> getFilhos(Integer idResponsavel) {
@@ -101,13 +99,12 @@ public class LoginActivity extends Activity {
 
     private Integer login(String email, String password) {
         Tarefa tarefaPost;
-        String json = "{'email': '" + email + "', 'senha':'" + password + "'}";
-        tarefaPost = new Tarefa(Util.URL_WEBSERVICE + "/rest/loginmobile.php",json);
+        tarefaPost = new Tarefa(Util.URL_WEBSERVICE + "/classes/utils/login.php?username="+ email + "&password=" + password);
         tarefaPost.setEventListen(new TarefaEvents() {
             @Override
             public void onCompleta(String retorno) {
-                Integer id = gson.fromJson(retorno, Integer.class);
-                setIdResponsavel(id);
+                Login login = gson.fromJson(retorno, Login.class);
+                getFilhos(login.getId());
             }
 
             @Override
@@ -140,9 +137,5 @@ public class LoginActivity extends Activity {
         parametro.putSerializable("filhos",filhos);
         intent.putExtras(parametro);
         startActivity(intent);
-    }
-
-    private void setIdResponsavel(Integer idResponsavel) {
-        this.idResponsavel = idResponsavel;
     }
 }
