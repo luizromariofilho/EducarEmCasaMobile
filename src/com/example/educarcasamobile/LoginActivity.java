@@ -8,7 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,72 +46,103 @@ public class LoginActivity extends Activity {
         String password = txtPassword.getText().toString();
 
         if(Util.validate(email) && Util.isNotNull(password)){
-            List<Filho> filhos = loginOnServer(email, password);
-            if(filhos != null){
-                if (filhos.size() == 1) {
-                    this.navigateToDetalhes(view);
-                } else {
-                    this.navigateToSelecionarFilho(view);
-                }
-                this.finish();
-            } else {
-                txtErrorServer.setVisibility(View.VISIBLE);
-                txtErrorLogin.setVisibility(View.GONE);
-            }
+            loginOnServer(email, password);
         } else{
             txtErrorLogin.setVisibility(View.VISIBLE);
             txtErrorServer.setVisibility(View.GONE);
         }
     }
 
-    private List<Filho> loginOnServer(String email, String password) {
-        Integer idResponsavel = login(email,password);
-        this.filhos = getFilhos(idResponsavel);
-        return this.filhos;
+    private void loginOnServer(String email, String password) {
+        Integer idResponsavel = 2;//login(email,password);
+        getFilhos(idResponsavel);
     }
 
     private List<Filho> getFilhos(Integer idResponsavel) {
-        return null;
+        Tarefa tarefa;
+        tarefa = new Tarefa(Util.URL_WEBSERVICE + "/classes/aluno/buscar-por-pai.php?id=" + idResponsavel);
+        tarefa.setEventListen(new TarefaEvents() {
+            @Override
+            public void onCompleta(String retorno) {
+                TypeToken<List<Filho>> token = new TypeToken<List<Filho>>() {};
+                ArrayList<Filho> filhos= gson.fromJson(retorno, token.getType());
+                setFilhos(filhos);
+                if(filhos != null){
+                    if (filhos.size() == 1) {
+                        navigateToDetalhes(filhos.get(0));
+                    } else {
+                        navigateToSelecionarFilho(filhos);
+                    }
+                    finish();
+                } else {
+                    txtErrorServer.setVisibility(View.VISIBLE);
+                    txtErrorLogin.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFalha(String retorno) {
+                System.out.println(retorno);
+                System.out.println("Erro ao sincronizar!");
+            }
+
+            @Override
+            public void onIniciada() {
+                System.out.println("Iniciando sincronização!");
+            }
+        });
+        tarefa.executar(true);
+        return this.filhos;
+    }
+
+    private void setFilhos(List<Filho> filhos) {
+        this.filhos = filhos;
     }
 
     private Integer login(String email, String password) {
         Tarefa tarefaPost;
-            String json = "{'email': '" + email + "', 'senha':'" + password + "'}";
-            tarefaPost = new Tarefa(Util.URL_WEBSERVICE + "/loginmobile.php",json);
-            tarefaPost.setEventListen(new TarefaEvents() {
-                @Override
-                public void onCompleta(String retorno) {
-                    Integer id = gson.fromJson(retorno, Integer.class);
-                    setIdResponsavel(id);
-                }
+        String json = "{'email': '" + email + "', 'senha':'" + password + "'}";
+        tarefaPost = new Tarefa(Util.URL_WEBSERVICE + "/rest/loginmobile.php",json);
+        tarefaPost.setEventListen(new TarefaEvents() {
+            @Override
+            public void onCompleta(String retorno) {
+                Integer id = gson.fromJson(retorno, Integer.class);
+                setIdResponsavel(id);
+            }
 
-                @Override
-                public void onFalha(String retorno) {
-                    System.out.println(retorno);
-                    System.out.println("Falha ao sincronizar.");
-                }
+            @Override
+            public void onFalha(String retorno) {
+                System.out.println(retorno);
+                System.out.println("Falha ao sincronizar.");
+            }
 
-                @Override
-                public void onIniciada() {
-                    System.out.println("Iniciando sincronização.");
-                }
-            });
-            tarefaPost.executar(true);
+            @Override
+            public void onIniciada() {
+                System.out.println("Iniciando sincronização.");
+            }
+        });
+        tarefaPost.executar(true);
         return null;
     }
 
 
-    private void navigateToDetalhes(View view){
-        Intent detalhesIntent = new Intent(this,DetalhesActivity.class);
-        startActivity(detalhesIntent);
+    private void navigateToDetalhes(Filho filho){
+        Intent intent = new Intent(this,DetalhesActivity.class);
+        Bundle parametro = new Bundle();
+        parametro.putSerializable("filho",filho);
+        intent.putExtras(parametro);
+        startActivity(intent);
     }
 
-    private void navigateToSelecionarFilho(View view){
-        Intent homeIntent = new Intent(this,SelecionarFilhoActivity.class);
-        startActivity(homeIntent);
+    private void navigateToSelecionarFilho(ArrayList<Filho> filhos){
+        Intent intent = new Intent(this,SelecionarFilhoActivity.class);
+        Bundle parametro = new Bundle();
+        parametro.putSerializable("filhos",filhos);
+        intent.putExtras(parametro);
+        startActivity(intent);
     }
 
-    public void setIdResponsavel(Integer idResponsavel) {
+    private void setIdResponsavel(Integer idResponsavel) {
         this.idResponsavel = idResponsavel;
     }
 }
